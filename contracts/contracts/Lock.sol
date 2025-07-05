@@ -19,23 +19,39 @@ contract VibeReview {
     // Reviewer => eventId => true/false (to avoid duplicates)
     mapping(address => mapping(uint256 => bool)) public hasReviewed;
 
+    // User => eventId => true if checked in
+    mapping(address => mapping(uint256 => bool)) public checkedIn;
+
     // Aggregate data
     mapping(uint256 => uint256) public totalScores; // total sum of scores per event
     mapping(uint256 => uint256) public reviewCounts; // total number of reviews per event
 
     event ReviewSubmitted(address indexed reviewer, uint256 indexed eventId, uint8 score, string comment);
+    event CheckIn(address indexed user, uint256 indexed eventId, uint256 timestamp);
     event Withdrawal(uint amount, uint when);
 
-    /// @notice Owner is payable because of withdraw function 
     constructor() payable {
         owner = payable(msg.sender);
     }
 
+    /// @notice Check-in to a side event
+    /// @dev Prevents duplicate check-ins
+    function checkIn(uint256 _eventId) external {
+        require(!checkedIn[msg.sender][_eventId], "Already checked in");
+
+        // Optional future validation with SNFT or proof
+
+        checkedIn[msg.sender][_eventId] = true;
+
+        emit CheckIn(msg.sender, _eventId, block.timestamp);
+    }
+
     /// @notice Submit a review for a side event
-    /// @dev The update of the mapping `hasReviewed` prevents duplicate reviews
+    /// @dev Only allowed after check-in; prevents duplicates
     function submitReview(uint256 _eventId, uint8 _score, string memory _comment) external {
         require(_score >= 1 && _score <= 5, "Score must be between 1 and 5");
         require(!hasReviewed[msg.sender][_eventId], "Already reviewed this event");
+        require(checkedIn[msg.sender][_eventId], "Must check in before reviewing");
 
         reviewsByEvent[_eventId].push(
             Review({
@@ -52,7 +68,7 @@ contract VibeReview {
 
         emit ReviewSubmitted(msg.sender, _eventId, _score, _comment);
     }
-    /// @dev Get all reviews for a specific side event
+
     /// @notice Get average score for a side event
     function getAverageScore(uint256 _eventId) external view returns (uint256) {
         if (reviewCounts[_eventId] == 0) {
