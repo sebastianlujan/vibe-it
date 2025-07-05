@@ -1,4 +1,3 @@
-import { events } from '@/utils/mockedEvents';
 import { Page } from '@/components/PageLayout';
 import { EventMap } from '@/components/EventMap';
 import { DaySelector } from '@/components/DaySelector/DaySelector';
@@ -12,7 +11,7 @@ export default function EventPage() {
 
       <Page.Main className="flex flex-col gap-6 p-4">
         <DaySelector />
-        <EventMap events={events} />
+        <EventMap />
       </Page.Main>
     </>
   );

@@ -8,12 +8,12 @@ type EventCardProps = {
   id: string;
   name: string;
   image: string;
-  date: string;
   hourStarts: string;
   hourEnds: string;
   lumaLink: string;
   score: number;
   attendees: number;
+  date: string;
 };
 
 export const EventCard = ({
@@ -25,13 +25,8 @@ export const EventCard = ({
   hourEnds,
   lumaLink,
   score,
-  attendees
+  attendees,
 }: EventCardProps) => {
-  const formattedDate = new Date(date).toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric'
-  });
   return (
     <Link href={`/event/${id}`}>
       <div className="w-full flex items-start gap-4 p-4 rounded-xl border border-gray-200 shadow-md hover:bg-gray-50 hover:text-black transition-all cursor-pointer">
@@ -43,14 +38,14 @@ export const EventCard = ({
         <div className="flex-1">
           <h3 className="text-md font-bold">{name}</h3>
           <p className="text-sm text-white hover:text-black">
-            {formattedDate} · {hourStarts} - {hourEnds}
+            {date} · {hourStarts} - {hourEnds}
           </p>
           <div className="flex items-center mt-1 gap-1 text-sm text-amber-400">
             <Star className="w-4 h-4" /> {score.toFixed(1)} / 5
           </div>
           <div className="flex items-center gap-1 text-white/80 text-sm hover:text-black">
             <User className="w-4 h-4 text-amber-300" />
-            1 attendee
+            {attendees} attendee{attendees !== 1 ? 's' : ''}
           </div>
           <a
             href={lumaLink}
