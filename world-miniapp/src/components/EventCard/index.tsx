@@ -34,7 +34,7 @@ export const EventCard = ({
   });
   return (
     <Link href={`/event/${id}`}>
-      <div className="w-full flex items-start gap-4 p-4 rounded-xl border border-gray-200 shadow-md hover:bg-gray-50 transition-all cursor-pointer">
+      <div className="w-full flex items-start gap-4 p-4 rounded-xl border border-gray-200 shadow-md hover:bg-gray-50 hover:text-black transition-all cursor-pointer">
         <img
           src={image}
           alt={name}
@@ -42,13 +42,13 @@ export const EventCard = ({
         />
         <div className="flex-1">
           <h3 className="text-md font-bold">{name}</h3>
-          <p className="text-sm text-white">
+          <p className="text-sm text-white hover:text-black">
             {formattedDate} · {hourStarts} - {hourEnds}
           </p>
           <div className="flex items-center mt-1 gap-1 text-sm text-amber-400">
             <Star className="w-4 h-4" /> {score.toFixed(1)} / 5
           </div>
-          <div className="flex items-center gap-1 text-white/80 text-sm">
+          <div className="flex items-center gap-1 text-white/80 text-sm hover:text-black">
             <User className="w-4 h-4 text-amber-300" />
             1 attendee
           </div>
@@ -59,7 +59,7 @@ export const EventCard = ({
             className="text-sm text-blue-500 underline mt-1 inline-block"
             onClick={(e) => e.stopPropagation()}
           >
-            View on map →
+            View on luma →
           </a>
         </div>
       </div>

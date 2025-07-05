@@ -18,7 +18,7 @@ type Props = {
 type MappedEvent = {
   id: string;
   name: string;
-  image: string;
+  image: string | null;
   lat: number;
   lng: number;
 };
@@ -37,6 +37,25 @@ export function EventMap({ events }: Props) {
 
   const [mappedEvents, setMappedEvents] = useState<MappedEvent[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<MappedEvent | null>(null);
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setUserLocation({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+                });
+            },
+            (error) => {
+                console.warn("Geolocation error:", error);
+            }
+            );
+        }
+    }, []);
+
+
 
   useEffect(() => {
     if (!isLoaded || events.length === 0) return;
@@ -80,6 +99,24 @@ export function EventMap({ events }: Props) {
 
   return (
     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
+      {userLocation && (
+        <Marker
+            position={userLocation}
+            title="Your Location"
+            onClick={() => setSelectedEvent({
+                id: "0",
+                name: "Your Location",
+                image: null,
+                lat: userLocation.lat,
+                lng: userLocation.lng
+            })}
+            icon={{
+                url: window.location.origin + "/maps-point.png",
+                scaledSize: new google.maps.Size(20, 20),
+            }}
+        />
+      )}
+
       {mappedEvents.map((event) => (
         <Marker
             key={event.id}
@@ -88,35 +125,41 @@ export function EventMap({ events }: Props) {
             onClick={() => setSelectedEvent(event)}
         />
       ))}
+
       {selectedEvent && (
         <InfoWindow
             position={{ lat: selectedEvent.lat, lng: selectedEvent.lng }}
             onCloseClick={() => setSelectedEvent(null)}
             >
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center', color: 'black' }}>
-                <img
-                src={selectedEvent.image}
-                alt={selectedEvent.name}
-                style={{
-                    width: '60px',
-                    height: '60px',
-                    objectFit: 'cover',
-                    borderRadius: '6px',
-                    marginRight: '2px'
-                }}
-                />
+                {selectedEvent.image &&
+                    <img
+                    src={selectedEvent.image}
+                    alt={selectedEvent.name}
+                    style={{
+                        width: '60px',
+                        height: '60px',
+                        objectFit: 'cover',
+                        borderRadius: '6px',
+                        marginRight: '2px'
+                    }}
+                    />
+                }
                 <div>
                 <h3 style={{ fontWeight: 'bold', margin: 0 }}>{selectedEvent.name}</h3>
-                <a
-                    href={`/event/${selectedEvent.id}`}
-                    style={{
-                    color: 'blue',
-                    textDecoration: 'underline',
-                    fontSize: '0.9rem',
-                    }}
-                >
-                    View details
-                </a>
+                {selectedEvent.image &&
+                    <a
+                        href={`/event/${selectedEvent.id}`}
+                        style={{
+                        color: 'blue',
+                        textDecoration: 'underline',
+                        fontSize: '0.9rem',
+                        }}
+                    >
+                        View details
+                    </a>
+                }
+              
                 </div>
             </div>
         </InfoWindow>
