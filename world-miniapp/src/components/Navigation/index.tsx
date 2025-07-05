@@ -1,25 +1,18 @@
 'use client';
 
 import { TabItem, Tabs } from '@worldcoin/mini-apps-ui-kit-react';
-import { Bank, Home, User } from 'iconoir-react';
-import { useState } from 'react';
-
-/**
- * This component uses the UI Kit to navigate between pages
- * Bottom navigation is the most common navigation pattern in Mini Apps
- * We require mobile first design patterns for mini apps
- * Read More: https://docs.world.org/mini-apps/design/app-guidelines#mobile-first
- */
+import { Map, Calendar, ChatBubbleCheck } from 'iconoir-react';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const Navigation = () => {
-  const [value, setValue] = useState('home');
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
-    <Tabs value={value} onValueChange={setValue}>
-      <TabItem value="home" icon={<Home />} label="Home" />
-      {/* // TODO: These currently don't link anywhere */}
-      <TabItem value="wallet" icon={<Bank />} label="Wallet" />
-      <TabItem value="profile" icon={<User />} label="Profile" />
+    <Tabs value={pathname} onValueChange={(val) => router.push(val)}>
+      <TabItem value="/home" icon={<Calendar />} label="Events" />
+      <TabItem value="/map" icon={<Map />} label="Map" />
+      <TabItem value="/report" icon={<ChatBubbleCheck />} label="Reports" />
     </Tabs>
   );
 };

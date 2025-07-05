@@ -6,6 +6,8 @@ import { UserInfo } from '@/components/UserInfo';
 import { Verify } from '@/components/Verify';
 import { ViewPermissions } from '@/components/ViewPermissions';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
+import { events } from '@/utils/mockedEvents';
+import { EventCard } from '@/components/EventCard';
 
 export default async function Home() {
   const session = await auth();
@@ -25,12 +27,10 @@ export default async function Home() {
           }
         />
       </Page.Header>
-      <Page.Main className="flex flex-col items-center justify-start gap-4 mb-16">
-        <UserInfo />
-        <Verify />
-        <Pay />
-        <Transaction />
-        <ViewPermissions />
+      <Page.Main className="flex flex-col gap-4 px-4 py-4">
+        {events.map((event) => (
+          <EventCard key={event.id} {...event} />
+        ))}
       </Page.Main>
     </>
   );
