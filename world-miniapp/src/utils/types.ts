@@ -24,8 +24,18 @@ export interface EventInfo {
     url: string
     visibility: string
     geo_address_info: {
-        mode: string
+        city: string
+        type: string
+        region: string
+        address: string
+        country: string
+        place_id: string
         city_state: string
+        description: string
+        country_code: string
+        full_address: string
+        apple_maps_place_id: string
+        mode: string
     }
     coordinate: {
         latitude: number

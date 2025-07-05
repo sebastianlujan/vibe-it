@@ -3,17 +3,8 @@
 
 import { useEffect, useState } from 'react';
 import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { useEvents } from '@/providers/EventsProvider';
 
-type Event = {
-  id: string;
-  name: string;
-  image: string;
-  address: string;
-};
-
-type Props = {
-  events: Event[];
-};
 
 type MappedEvent = {
   id: string;
@@ -29,7 +20,8 @@ const containerStyle = {
   borderRadius: '1rem',
 };
 
-export function EventMap({ events }: Props) {
+export function EventMap() {
+  const { events, loading } = useEvents();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
     libraries: ['places'],
@@ -39,38 +31,29 @@ export function EventMap({ events }: Props) {
   const [selectedEvent, setSelectedEvent] = useState<MappedEvent | null>(null);
 
   useEffect(() => {
-    if (!isLoaded || events.length === 0) return;
+    if (!isLoaded || events.length === 0 || loading) return;
 
-    const geocodeEvents = async () => {
-      const geocoder = new window.google.maps.Geocoder();
-
+    const mapEvents = () => {
       const results: MappedEvent[] = [];
 
-      for (const event of events) {
-        try {
-          const res = await new Promise<google.maps.GeocoderResult[]>((resolve, reject) => {
-            geocoder.geocode({ address: event.address }, (results, status) => {
-              if (status === 'OK' && results && results[0]) {
-                resolve(results);
-              } else {
-                reject(status);
-              }
-            });
+      for (const eventEntry of events) {
+        const { coordinate } = eventEntry.event;
+        if (coordinate && coordinate.latitude && coordinate.longitude) {
+          results.push({
+            id: eventEntry.event.api_id,
+            name: eventEntry.event.name,
+            image: eventEntry.event.cover_url,
+            lat: coordinate.latitude,
+            lng: coordinate.longitude,
           });
-
-          const { lat, lng } = res[0].geometry.location;
-          console.log(lat, lng);
-          results.push({ id: event.id, name: event.name, image: event.image, lat: lat(), lng: lng() });
-        } catch (err) {
-          console.warn(`Error geocoding address: ${event.address}`, err);
         }
       }
 
       setMappedEvents(results);
     };
 
-    geocodeEvents();
-  }, [isLoaded, events]);
+    mapEvents();
+  }, [isLoaded, events, loading]);
 
   const center = mappedEvents.length > 0
     ? { lat: mappedEvents[0].lat, lng: mappedEvents[0].lng }
