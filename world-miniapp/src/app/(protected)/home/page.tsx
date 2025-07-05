@@ -7,11 +7,14 @@ import { UserInfo } from '@/components/UserInfo';
 import { Verify } from '@/components/Verify';
 import { ViewPermissions } from '@/components/ViewPermissions';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
-import { DaySelector } from '@/components/DaySelector/DaySelector';
-import { EventList } from '@/components/EventList';
+import { events } from '@/utils/mockedEvents';
+import { EventCard } from '@/components/EventCard';
+import { useEvents } from '@/providers/EventsProvider';
 
 export default async function Home() {
   const session = await auth();
+  const { events:fetchedEvents } = useEvents();
+
 
   return (
     <>
