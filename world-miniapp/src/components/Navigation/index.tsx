@@ -9,10 +9,21 @@ export const Navigation = () => {
   const router = useRouter();
 
   return (
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
+        background: 'white',
+        borderTop: '1px solid #eee',
+        zIndex: 100,
+        padding: '10px'
+      }}
+    >
     <Tabs value={pathname} onValueChange={(val) => router.push(val)}>
       <TabItem value="/home" icon={<Calendar />} label="Events" />
       <TabItem value="/map" icon={<Map />} label="Map" />
-      <TabItem value="/report" icon={<ChatBubbleCheck />} label="Reports" />
     </Tabs>
+    </div>
   );
 };

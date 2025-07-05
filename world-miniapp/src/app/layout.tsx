@@ -3,6 +3,7 @@ import ClientProviders from '@/providers';
 import '@worldcoin/mini-apps-ui-kit-react/styles.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { DayFilterProvider } from '@/context/DayFilterProvider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -29,7 +30,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} `}>
-        <ClientProviders session={session}>{children}</ClientProviders>
+        <ClientProviders session={session}>
+          <DayFilterProvider>
+            {children}
+          </DayFilterProvider>
+          </ClientProviders>
       </body>
     </html>
   );

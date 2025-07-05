@@ -1,3 +1,4 @@
+
 import { auth } from '@/auth';
 import { Page } from '@/components/PageLayout';
 import { Pay } from '@/components/Pay';
@@ -6,8 +7,8 @@ import { UserInfo } from '@/components/UserInfo';
 import { Verify } from '@/components/Verify';
 import { ViewPermissions } from '@/components/ViewPermissions';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
-import { events } from '@/utils/mockedEvents';
-import { EventCard } from '@/components/EventCard';
+import { DaySelector } from '@/components/DaySelector/DaySelector';
+import { EventList } from '@/components/EventList';
 
 export default async function Home() {
   const session = await auth();
@@ -28,9 +29,8 @@ export default async function Home() {
         />
       </Page.Header>
       <Page.Main className="flex flex-col gap-4 px-4 py-4">
-        {events.map((event) => (
-          <EventCard key={event.id} {...event} />
-        ))}
+        <DaySelector />
+        <EventList />
       </Page.Main>
     </>
   );

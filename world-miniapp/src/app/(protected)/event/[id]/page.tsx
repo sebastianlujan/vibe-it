@@ -14,6 +14,12 @@ export default function EventDetailPage({ params }: Props) {
 
   if (!event) return notFound();
 
+  const formattedDate = new Date(event.date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric'
+  });
+
   return (
     <>
       <Page.Header className="p-4">
@@ -28,7 +34,7 @@ export default function EventDetailPage({ params }: Props) {
         />
         <div className="text-white space-y-2">
           <p><strong>Organizer:</strong> {event.organizer}</p>
-          <p><strong>Date:</strong> {event.day}</p>
+          <p><strong>Date:</strong> {formattedDate}</p>
           <p><strong>Time:</strong> {event.hourStarts} - {event.hourEnds}</p>
           <p><strong>Address:</strong> {event.address}</p>
           <p>

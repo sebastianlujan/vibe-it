@@ -2,11 +2,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 
 type Event = {
   id: string;
   name: string;
+  image: string;
   address: string;
 };
 
@@ -17,6 +18,7 @@ type Props = {
 type MappedEvent = {
   id: string;
   name: string;
+  image: string;
   lat: number;
   lng: number;
 };
@@ -34,6 +36,7 @@ export function EventMap({ events }: Props) {
   });
 
   const [mappedEvents, setMappedEvents] = useState<MappedEvent[]>([]);
+  const [selectedEvent, setSelectedEvent] = useState<MappedEvent | null>(null);
 
   useEffect(() => {
     if (!isLoaded || events.length === 0) return;
@@ -57,7 +60,7 @@ export function EventMap({ events }: Props) {
 
           const { lat, lng } = res[0].geometry.location;
           console.log(lat, lng);
-          results.push({ id: event.id, name: event.name, lat: lat(), lng: lng() });
+          results.push({ id: event.id, name: event.name, image: event.image, lat: lat(), lng: lng() });
         } catch (err) {
           console.warn(`Error geocoding address: ${event.address}`, err);
         }
@@ -79,11 +82,45 @@ export function EventMap({ events }: Props) {
     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
       {mappedEvents.map((event) => (
         <Marker
-          key={event.id}
-          position={{ lat: event.lat, lng: event.lng }}
-          title={event.name}
+            key={event.id}
+            position={{ lat: event.lat, lng: event.lng }}
+            title={event.name}
+            onClick={() => setSelectedEvent(event)}
         />
       ))}
+      {selectedEvent && (
+        <InfoWindow
+            position={{ lat: selectedEvent.lat, lng: selectedEvent.lng }}
+            onCloseClick={() => setSelectedEvent(null)}
+            >
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', color: 'black' }}>
+                <img
+                src={selectedEvent.image}
+                alt={selectedEvent.name}
+                style={{
+                    width: '60px',
+                    height: '60px',
+                    objectFit: 'cover',
+                    borderRadius: '6px',
+                    marginRight: '2px'
+                }}
+                />
+                <div>
+                <h3 style={{ fontWeight: 'bold', margin: 0 }}>{selectedEvent.name}</h3>
+                <a
+                    href={`/event/${selectedEvent.id}`}
+                    style={{
+                    color: 'blue',
+                    textDecoration: 'underline',
+                    fontSize: '0.9rem',
+                    }}
+                >
+                    View details
+                </a>
+                </div>
+            </div>
+        </InfoWindow>
+        )}
     </GoogleMap>
   );
 }
