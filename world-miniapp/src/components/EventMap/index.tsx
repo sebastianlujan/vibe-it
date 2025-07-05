@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 import { useEvents } from '@/providers/EventsProvider';
+import { useDayFilter } from '@/context/DayFilterProvider';
 
 
 type MappedEvent = {
@@ -22,6 +23,7 @@ const containerStyle = {
 
 export function EventMap() {
   const { events, loading } = useEvents();
+  const { selectedDate } = useDayFilter();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
     libraries: ['places'],
@@ -55,7 +57,14 @@ export function EventMap() {
     const mapEvents = () => {
       const results: MappedEvent[] = [];
 
-      for (const eventEntry of events) {
+      // Filter events by selected date first (same logic as EventList)
+      const filteredEvents = events.filter((eventEntry) => {
+        if (!selectedDate) return true;
+        const eventDate = new Date(eventEntry.event.start_at).toISOString().split('T')[0];
+        return eventDate === selectedDate;
+      });
+
+      for (const eventEntry of filteredEvents) {
         const { coordinate } = eventEntry.event;
         if (coordinate && coordinate.latitude && coordinate.longitude) {
           results.push({
@@ -72,7 +81,7 @@ export function EventMap() {
     };
 
     mapEvents();
-  }, [isLoaded, events, loading]);
+  }, [isLoaded, events, loading, selectedDate]);
 
   const center = mappedEvents.length > 0
     ? { lat: mappedEvents[0].lat, lng: mappedEvents[0].lng }

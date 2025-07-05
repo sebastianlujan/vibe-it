@@ -7,7 +7,7 @@ export const DaySelector = () => {
 
   return (
       <div className="p-4 flex items-center gap-4 text-white">
-        <label className="text-sm text-gray-300 font-medium">Select a date</label>
+        <label className="text-sm font-medium">Select a date</label>
         <input
           type="date"
           value={selectedDate ?? ''}

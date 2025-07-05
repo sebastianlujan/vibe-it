@@ -41,7 +41,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
           alt={event.name}
           className="w-64 h-64 object-cover rounded-xl mx-auto"
         />
-        <div className="text-white space-y-2">
+        <div className="space-y-2">
           {mainHost && (
             <p><strong>Organizer:</strong> {mainHost.name}</p>
           )}
@@ -75,44 +75,13 @@ export const EventDetail = ({ id }: EventDetailProps) => {
           <div className="flex items-center gap-1 text-sm mt-2 text-amber-400">
             <Star className="w-4 h-4" /> {(Math.random() * 5).toFixed(1)} / 5
           </div>
-          <div className="flex items-center gap-1 text-white/80 text-sm">
+          <div className="flex items-center gap-1 text-sm">
             <User className="w-4 h-4 text-amber-300" />
-            {eventEntry.guest_count} attendee{eventEntry.guest_count !== 1 ? 's' : ''}
+            <p>
+              {eventEntry.guest_count} attendee{eventEntry.guest_count !== 1 ? 's' : ''}
+            </p>
           </div>
         </div>
-
-        {eventEntry.featured_guests.length > 0 && (
-          <div className="mt-6 pb-28">
-            <h2 className="text-lg font-semibold mb-4 text-white">Featured Guests</h2>
-            <div className="grid grid-cols-1 gap-4">
-              {eventEntry.featured_guests.slice(0, 6).map((guest) => (
-                <div key={guest.api_id} className="bg-gray-100 p-3 rounded-md text-black flex items-center gap-3">
-                  <img
-                    src={guest.avatar_url}
-                    alt={guest.name}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div className="flex-1">
-                    <div className="font-semibold">{guest.name}</div>
-                    {guest.bio_short && (
-                      <p className="text-sm text-gray-600 mt-1">{guest.bio_short}</p>
-                    )}
-                    {guest.twitter_handle && (
-                      <a
-                        href={`https://twitter.com/${guest.twitter_handle}`}
-                        className="text-blue-500 text-sm"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        @{guest.twitter_handle}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </Page.Main>
     </>
   );
