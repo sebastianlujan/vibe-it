@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
 import './UserOpinionComponent.css'
 
 type UserOpinions = {
     opinion: string;
     valuation: number;
+    username: string;
 }
 
-export default function UserOpinionComponent() {
+export default function UserOpinionComponent({eventEntry}: {eventEntry: any}) {
     const [userOpinion, setUserOpinion] = useState<string>('');
     const [userValuation, setUserValuation] = useState<number>(3); // 0-5, default to middle
     const [otherOpinions, setOtherOpinions] = useState<UserOpinions[]>([]);
 
     const handleSubmit = () => {
         if (userOpinion.trim()) {
-            setOtherOpinions([...otherOpinions, { opinion: userOpinion, valuation: userValuation }]);
+            setOtherOpinions([...otherOpinions, { opinion: userOpinion, valuation: userValuation, username: 'John Doe' }]);
             setUserOpinion('');
             setUserValuation(3);
         }
@@ -28,6 +30,19 @@ export default function UserOpinionComponent() {
         const colors = ['#ff4444', '#ff7744', '#ffaa44', '#44aa44', '#44aa77', '#44aa99'];
         return colors[value];
     }
+
+    useEffect(() => {
+        if(eventEntry?.event?.name?.includes('POOL & BBQ')) {
+            setOtherOpinions([
+                {
+                    opinion: 'You’re in 2025 and random dudes are inviting you to a pool party and people still wonder why some women are feeling so unsafe in the ecosystem',
+                    valuation: 0,
+                    username: 'global.eth'
+                }
+            ])
+            setUserValuation(4);
+        }
+    }, [eventEntry]);
 
   return (
     <div className="user-opinion-container">
