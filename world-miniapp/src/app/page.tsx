@@ -51,7 +51,9 @@ export default function Home() {
 
         {/* Auth Section */}
         <div className="w-full max-w-md space-y-4 mx-auto">
-          <AuthButton />
+          <div className="flex justify-center">
+            <AuthButton />
+          </div>
           
           {/* Optional: Add some stats or info */}
           <div className="text-center">
