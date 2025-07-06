@@ -6,7 +6,7 @@ import { HaloCommandObject } from '@arx-research/libhalo/types';
 
 export const NFCSigner = () => {
     const [status, setStatus] = useState('Ready to scan');
-    const [result, setResult] = useState(null);
+    const [result, setResult] = useState<string | null>(null);
     const [isReading, setIsReading] = useState(false);
     const [signature, setSignature] = useState(null);
 
