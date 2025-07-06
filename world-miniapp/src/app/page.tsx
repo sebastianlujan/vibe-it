@@ -24,7 +24,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-lg mx-auto">
-              The best way to find your next side event in Cannes
+              The best way to find your next side event
             </p>
           </div>
 

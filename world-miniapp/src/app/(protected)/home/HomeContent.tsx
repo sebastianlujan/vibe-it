@@ -16,7 +16,7 @@ export const HomeContent = () => {
           Discover Amazing Events
         </h1>
         <p className="text-gray-600">
-          Find your next side event in Cannes
+          Find side event
         </p>
       </div>
 
