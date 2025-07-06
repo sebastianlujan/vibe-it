@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { NFCSigner } from '@/components/NFCSigner';
 import { Page } from '@/components/PageLayout';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
 import { EventList } from '@/components/EventList';
@@ -25,6 +26,9 @@ export default async function Home() {
       <Page.Main className="flex flex-col gap-4 px-4 py-4">
         <DaySelector />
         <EventList />
+      <Page.Main className="flex flex-col items-center justify-start gap-4 mb-16">
+        hola
+        <NFCSigner />
       </Page.Main>
     </>
   );
