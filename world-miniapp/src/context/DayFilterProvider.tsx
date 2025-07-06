@@ -15,7 +15,6 @@ export const DayFilterProvider = ({ children }: { children: React.ReactNode }) =
 
   useEffect(() => {
     const stored = localStorage.getItem('selected-date');
-    if (stored) setSelectedDate(stored);
   }, []);
 
   const updateDate = (date: string) => {

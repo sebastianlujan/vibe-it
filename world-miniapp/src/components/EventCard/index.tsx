@@ -37,25 +37,21 @@ export const EventCard = ({
         />
         <div className="flex-1">
           <h3 className="text-md font-bold">{name}</h3>
-          <p className="text-sm text-white hover:text-black">
+          <p className="text-sm">
             {date} · {hourStarts} - {hourEnds}
           </p>
           <div className="flex items-center mt-1 gap-1 text-sm text-amber-400">
             <Star className="w-4 h-4" /> {score.toFixed(1)} / 5
           </div>
-          <div className="flex items-center gap-1 text-white/80 text-sm hover:text-black">
+          <div className="flex items-center text-amber-400 gap-1 text-sm">
             <User className="w-4 h-4 text-amber-300" />
             {attendees} attendee{attendees !== 1 ? 's' : ''}
           </div>
-          <a
-            href={lumaLink}
-            target="_blank"
-            rel="noopener noreferrer"
+          <p
             className="text-sm text-blue-500 underline mt-1 inline-block"
-            onClick={(e) => e.stopPropagation()}
           >
-            View on luma →
-          </a>
+            View event details →
+          </p>
         </div>
       </div>
     </Link>

@@ -77,7 +77,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
           </div>
           <div className="flex items-center gap-1 text-sm">
             <User className="w-4 h-4 text-amber-300" />
-            <p>
+            <p className='text-amber-300'>
               {eventEntry.guest_count} attendee{eventEntry.guest_count !== 1 ? 's' : ''}
             </p>
           </div>
