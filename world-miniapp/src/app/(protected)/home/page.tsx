@@ -1,9 +1,6 @@
 import { auth } from '@/auth';
-import { NFCSigner } from '@/components/NFCSigner';
 import { Page } from '@/components/PageLayout';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
-import { EventList } from '@/components/EventList';
-import { DaySelector } from '@/components/DaySelector/DaySelector';
 import { User } from 'iconoir-react';
 import { MiniKit } from '@worldcoin/minikit-js';
 import { http } from 'viem'
