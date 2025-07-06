@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'vibe-it',
+  title: 'Vibe-it',
   description: 'The best way to find your next side event',
 };
 
