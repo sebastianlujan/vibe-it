@@ -1,12 +1,9 @@
 import { auth } from '@/auth';
 import { NFCSigner } from '@/components/NFCSigner';
 import { Page } from '@/components/PageLayout';
-import { Pay } from '@/components/Pay';
-import { Transaction } from '@/components/Transaction';
-import { UserInfo } from '@/components/UserInfo';
-import { Verify } from '@/components/Verify';
-import { ViewPermissions } from '@/components/ViewPermissions';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
+import { EventList } from '@/components/EventList';
+import { DaySelector } from '@/components/DaySelector/DaySelector';
 
 export default async function Home() {
   const session = await auth();
@@ -26,6 +23,9 @@ export default async function Home() {
           }
         />
       </Page.Header>
+      <Page.Main className="flex flex-col gap-4 px-4 py-4">
+        <DaySelector />
+        <EventList />
       <Page.Main className="flex flex-col items-center justify-start gap-4 mb-16">
         hola
         <NFCSigner />
