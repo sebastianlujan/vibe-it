@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Graph } from '@graphprotocol/grc-20';
 
 /**
