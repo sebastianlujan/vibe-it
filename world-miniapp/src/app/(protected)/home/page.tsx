@@ -29,9 +29,9 @@ export default async function Home() {
   const ensOrAddress = result?.name ? result.name : session?.user!.username;
   return (
     <>
-      <Page.Header className="p-0 bg-white/80 backdrop-blur-lg border-b border-gray-200/50">
+      <Page.Header className="p-0 bg-white/80 backdrop-blur-lg border-b border-gray-200/50 text-black">
         <TopBar
-          title="vibe-it"
+          title="Vibe-it"
           endAdornment={
 
             <div className="flex items-center gap-3">
@@ -52,14 +52,9 @@ export default async function Home() {
                   <User className="w-6 h-6 text-gray-600" />
                 </div>
               )}
-                <Marble 
-                  src={session?.user.profilePictureUrl} 
-                  className="w-12 h-12 border-2 border-indigo-200 hover:border-indigo-300 transition-colors" 
-                />
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
               </div>
             
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
             </div>
           }
         />

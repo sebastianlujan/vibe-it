@@ -1,3 +1,21 @@
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --card: #f9f9f9;
+  --border: #e0e0e0;
+  --primary: #6366f1;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #e0e7ff;
+  --ring: #c7d2fe;
+  --radius: 0.75rem;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --gradient-primary: linear-gradient(to right, #facc15, #f59e0b);
+}
+
 .user-opinion-container {
     max-width: 800px;
     margin: 0 auto;

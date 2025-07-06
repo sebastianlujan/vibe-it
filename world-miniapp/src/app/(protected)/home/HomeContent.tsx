@@ -23,12 +23,12 @@ export const HomeContent = () => {
       {/* Filters Section */}
       <div className="grid gap-4 md:grid-cols-2">
         {/* Day Selector */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200">
+        <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-200">
           <DaySelector />
         </div>
         
         {/* Search */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200">
+        <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-200">
           <EventSearch 
             onSearchChange={setSearchTerm}
             placeholder="Search events by name..."

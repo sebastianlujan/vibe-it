@@ -40,7 +40,7 @@ export const EventSearch = ({
           value={searchTerm}
           onChange={handleInputChange}
           placeholder={placeholder}
-          className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white text-gray-900 placeholder-gray-500 text-sm"
+          className="w-full pl-12 pr-12 py-3 h-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white text-gray-900 placeholder-gray-500 text-sm"
         />
         
         {/* Clear button */}

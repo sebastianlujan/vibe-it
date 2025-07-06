@@ -36,7 +36,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
         <h1 className="text-xl font-bold text-black">{event.name}</h1>
       </Page.Header>
 
-      <Page.Main className="flex flex-col gap-6 p-4">
+      <Page.Main className="flex flex-col gap-6 p-4 bg-white text-black">
         <img
           src={event.cover_url}
           alt={event.name}

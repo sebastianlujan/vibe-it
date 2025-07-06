@@ -45,7 +45,7 @@ export default function UserOpinionComponent({eventEntry}: {eventEntry: any}) {
     }, [eventEntry]);
 
   return (
-    <div className="user-opinion-container">
+    <div className="user-opinion-container bg-white text-black">
         <div className="opinion-form">
             <h2>Share Your Opinion</h2>
             <div className="form-group">
