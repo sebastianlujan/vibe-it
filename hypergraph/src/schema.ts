@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Graph } from '@graphprotocol/grc-20';
 
 export const { id: scorePropId, ops: scoreOps } = Graph.createProperty({
