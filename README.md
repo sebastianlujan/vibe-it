@@ -70,4 +70,4 @@ Thanks to The Graph's semantic structure, these questions are answerable out-of-
 
 ## 👥 Team
 
-Built at [ETHGlobal Paris / Hackathon Name] with love <3
+Built at ETHGlobal Cannes with love <3
