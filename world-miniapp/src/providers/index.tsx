@@ -4,6 +4,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import type { ReactNode } from 'react';
+import EventsProvider from './EventsProvider';
 
 const ErudaProvider = dynamic(
   () => import('@/providers/Eruda').then((c) => c.ErudaProvider),
@@ -26,6 +27,9 @@ interface ClientProvidersProps {
  * - MiniKitProvider:
  *     - Required for MiniKit functionality.
  *
+ * - EventsProvider:
+ *     - Provides events data from Luma API to the entire app.
+ *
  * This component ensures both providers are available to all child components.
  */
 export default function ClientProviders({
@@ -35,7 +39,11 @@ export default function ClientProviders({
   return (
     <ErudaProvider>
       <MiniKitProvider>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          <EventsProvider>
+            {children}
+          </EventsProvider>
+        </SessionProvider>
       </MiniKitProvider>
     </ErudaProvider>
   );
