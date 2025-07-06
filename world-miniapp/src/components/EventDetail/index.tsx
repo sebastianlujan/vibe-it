@@ -83,7 +83,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
             </p>
           </div>
         </div>
-        <UserOpinionComponent/>
+        <UserOpinionComponent eventEntry={eventEntry} />
       </Page.Main>
     </>
   );
