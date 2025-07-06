@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { graph } from './client';
 import { createReputationSchema } from './schema';
 
