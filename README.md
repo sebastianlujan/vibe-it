@@ -1,32 +1,73 @@
-# Vibe-it
+# 🌐 Worldcoin ETHCC Events Mini App — Social Reputation via Hypergraph
 
-A tool to make devconnect easy and accessible.
+We built a **Worldcoin Mini App** that transforms ETHCC side events into a **frictionless social layer** inside the **World App**.
 
-## Installation
+> 🧠 Human-verified feedback. 📊 Event insights. 🧭 No wallets or logins needed.
 
-### Prerequisites
+---
 
-Make sure you have a Linux system with appropriate permissions to install system-wide binaries.
+## 🎯 What it does
 
-### Installing Oasis CLI
+This Mini App scrapes **ETHCC side events from Luma** and lets World App users:
 
-1. **Download the binary**
-   
-   Visit the [Oasis CLI releases page](https://github.com/oasisprotocol/cli/releases) and download the appropriate binary for your system.
+- ✅ **Mark attendance**
+- 💬 **Comment** on events
+- ⭐️ **Rate** them with a score
 
-2. **Install the binary**
-   
-   Once you download the binary, move it to the appropriate folder and give it execution permissions:
+All interactions are stored and modeled using **The Graph’s Knowledge Graph**, creating a structured, composable data layer of:
 
-   ```bash
-   sudo mv ~/Downloads/oasis_cli_0.14.1_linux_amd64/oasis /usr/local/bin/
-   sudo chmod +x /usr/local/bin/oasis
-   ```
+- Who attended what
+- What users thought (comment & score)
+- How events trend within the community
 
-3. **Verify installation**
-   
-   Check that the installation was successful:
+This enables **portable, Sybil-resistant reputation** for events and attendees — right from the **World App**.
 
-   ```bash
-   oasis --version
-   ```
+---
+
+## ⚙️ Tech Stack
+
+- **🌀 Worldcoin Mini App SDK** — identity & UI inside World App
+- **📡 Hypergraph (GRC-20)** — semantic data modeling via The Graph
+- **💻 Next.js + Tailwind** — frontend
+- **🗃 IPFS + Smart Account (Geo)** — data publication & signing
+
+---
+
+## 🚀 Why it matters
+
+- **No wallets or logins** — built directly into World App UX
+- **Sybil-resistant** — every interaction is verified with World ID
+- **Composability** — all reviews and relationships are open & queryable
+- **Community value** — understand event quality via real human feedback
+
+This is the **first layer of portable reputation for IRL events**, verified by Worldcoin and stored in The Graph for anyone to build on top.
+
+---
+
+## 🧪 Example Use Case
+
+> _"Which ETHCC side events are most loved by real attendees?"_  
+> _"How does attendance correlate with DAO contributors?"_
+
+Thanks to The Graph's semantic structure, these questions are answerable out-of-the-box via simple queries.
+
+---
+
+## 📸 Screenshots / Demo
+
+> _(Add screenshots or a Loom link here if available)_  
+> e.g., Marking attendance, rating an event, viewing community trends.
+
+---
+
+## 🧠 Learn More
+
+- [Worldcoin Developer Docs](https://docs.worldcoin.org)
+- [The Graph Knowledge Graph](https://thegraph.com/blog/introducing-the-knowledge-graph)
+- [Hypergraph SDK (grc-20)](https://github.com/graphprotocol/hypergraph)
+
+---
+
+## 👥 Team
+
+Built at ETHGlobal Cannes with love <3

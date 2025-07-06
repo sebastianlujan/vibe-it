@@ -6,10 +6,10 @@ export default function EventPage() {
   return (
     <>
       <Page.Header className="p-4">
-        <h1 className="text-xl font-bold text-black">Map</h1>
+        <h1 className="text-xl font-bold text-black bg-white">Map</h1>
       </Page.Header>
 
-      <Page.Main className="flex flex-col gap-6 p-4">
+      <Page.Main className="flex flex-col gap-6 p-4 bg-white">
         <DaySelector />
         <EventMap />
       </Page.Main>

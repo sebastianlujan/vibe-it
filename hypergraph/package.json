@@ -1,0 +1,23 @@
+{
+  "name": "hypergraph",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "ts-node publishSchema.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphprotocol/grc-20": "^0.21.4",
+    "@graphprotocol/hypergraph": "0.0.12",
+    "@graphprotocol/hypergraph-react": "^0.0.12",
+    "ethers": "^6.15.0",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "keywords": [],
+  "description": ""
+}

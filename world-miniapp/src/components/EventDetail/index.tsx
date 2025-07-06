@@ -5,6 +5,9 @@ import { Page } from '@/components/PageLayout';
 import { Star, User } from 'iconoir-react';
 import { formatEventDate, formatEventTime, getEventLocation, getEventMapsLink, getEventLumaLink, getEventMainHost } from '@/utils/eventUtils';
 import { notFound } from 'next/navigation';
+import UserOpinionComponent from '../UserOpinionComponent/UserOpinionComponent';
+import axiosInstance from '@/utils/axios';
+import { useEffect } from 'react';
 
 type EventDetailProps = {
   id: string;
@@ -23,6 +26,16 @@ export const EventDetail = ({ id }: EventDetailProps) => {
     return null;
   }
 
+  const fetchMessages = async () => {
+    const response = await axiosInstance.get(`/messages/event/${id}`);
+    console.log(response.data);
+    return response.data;
+  }
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
   const event = eventEntry.event;
   const mainHost = getEventMainHost(eventEntry);
   const location = getEventLocation(eventEntry);
@@ -35,7 +48,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
         <h1 className="text-xl font-bold text-black">{event.name}</h1>
       </Page.Header>
 
-      <Page.Main className="flex flex-col gap-6 p-4">
+      <Page.Main className="flex flex-col gap-6 p-4 bg-white text-black">
         <img
           src={event.cover_url}
           alt={event.name}
@@ -82,6 +95,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
             </p>
           </div>
         </div>
+        <UserOpinionComponent eventEntry={eventEntry} />
       </Page.Main>
     </>
   );

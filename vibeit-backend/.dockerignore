@@ -1,5 +1,41 @@
+# Dependencies
 node_modules
 dist
+
+# Logs
 *.log
+*.log.*
+npm-debug.log*
+pnpm-debug.log*
+
+# Documentation
 *.md
+README.md
+
+# Git
 .git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Test files
+test
+*.test.js
+*.spec.js
+coverage
+
+# Config files
+.env
+.env.*
+.dockerignore
+Dockerfile*
+
+# Build artifacts
+*.tsbuildinfo
+build
+
+# OS files
+.DS_Store
+Thumbs.db
