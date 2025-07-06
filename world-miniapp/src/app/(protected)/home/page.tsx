@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { NFCSigner } from '@/components/NFCSigner';
 import { Page } from '@/components/PageLayout';
 import { Pay } from '@/components/Pay';
 import { Transaction } from '@/components/Transaction';
@@ -26,11 +27,8 @@ export default async function Home() {
         />
       </Page.Header>
       <Page.Main className="flex flex-col items-center justify-start gap-4 mb-16">
-        <UserInfo />
-        <Verify />
-        <Pay />
-        <Transaction />
-        <ViewPermissions />
+        hola
+        <NFCSigner />
       </Page.Main>
     </>
   );
