@@ -173,7 +173,7 @@ export const EventList = ({ searchTerm = '' }: EventListProps) => {
                 minute: '2-digit' 
               })}
               lumaLink={`https://lu.ma/${eventEntry.event.url}`}
-              score={Math.random() * 5} // Placeholder since Luma API doesn't provide scores
+              score={0} // Placeholder since Luma API doesn't provide scores
               attendees={eventEntry.guest_count}
             />
           </div>
