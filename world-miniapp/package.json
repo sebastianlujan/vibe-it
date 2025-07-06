@@ -22,6 +22,7 @@
     "@worldcoin/mini-apps-ui-kit-react": "^1.0.2",
     "@worldcoin/minikit-js": "1.9.6",
     "@worldcoin/minikit-react": "1.9.6",
+    "axios": "^1.10.0",
     "clsx": "^2.1.1",
     "ethers": "^6.15.0",
     "iconoir-react": "^7.11.0",

@@ -6,6 +6,8 @@ import { Star, User } from 'iconoir-react';
 import { formatEventDate, formatEventTime, getEventLocation, getEventMapsLink, getEventLumaLink, getEventMainHost } from '@/utils/eventUtils';
 import { notFound } from 'next/navigation';
 import UserOpinionComponent from '../UserOpinionComponent/UserOpinionComponent';
+import axiosInstance from '@/utils/axios';
+import { useEffect } from 'react';
 
 type EventDetailProps = {
   id: string;
@@ -23,6 +25,16 @@ export const EventDetail = ({ id }: EventDetailProps) => {
     notFound();
     return null;
   }
+
+  const fetchMessages = async () => {
+    const response = await axiosInstance.get(`/messages/event/${id}`);
+    console.log(response.data);
+    return response.data;
+  }
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   const event = eventEntry.event;
   const mainHost = getEventMainHost(eventEntry);
