@@ -1,8 +1,6 @@
 services:
   vibeit:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: docker.io/s1x3l4/vibeit-backend:latest
     ports:
       - 3000:3000
     working_dir: /app

@@ -5,6 +5,7 @@ import { Page } from '@/components/PageLayout';
 import { Star, User } from 'iconoir-react';
 import { formatEventDate, formatEventTime, getEventLocation, getEventMapsLink, getEventLumaLink, getEventMainHost } from '@/utils/eventUtils';
 import { notFound } from 'next/navigation';
+import UserOpinionComponent from '../UserOpinionComponent/UserOpinionComponent';
 
 type EventDetailProps = {
   id: string;
@@ -82,6 +83,7 @@ export const EventDetail = ({ id }: EventDetailProps) => {
             </p>
           </div>
         </div>
+        <UserOpinionComponent/>
       </Page.Main>
     </>
   );
