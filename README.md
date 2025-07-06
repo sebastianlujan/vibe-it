@@ -14,7 +14,7 @@ This Mini App scrapes **ETHCC side events from Luma** and lets World App users:
 - 💬 **Comment** on events
 - ⭐️ **Rate** them with a score
 
-All interactions are stored and modeled using **The Graph’s Knowledge Graph**, creating a structured, composable data layer of:
+All interactions are stored and modeled using **The Graph's Knowledge Graph**, creating a structured, composable data layer of:
 
 - Who attended what
 - What users thought (comment & score)
@@ -55,8 +55,107 @@ Thanks to The Graph's semantic structure, these questions are answerable out-of-
 
 ## 📸 Screenshots / Demo
 
-> _(Add screenshots or a Loom link here if available)_  
-> e.g., Marking attendance, rating an event, viewing community trends.
+![VibeIt Demo](./5140905360746458640.jpg)
+
+---
+
+## 🚀 Running the Demo
+
+### Prerequisites
+
+- Node.js 18+ installed
+- [ngrok](https://ngrok.com/) account and CLI tool
+- [Worldcoin Developer Portal](https://developer.worldcoin.org) account
+
+### Setup Instructions
+
+1. **Clone and navigate to the project**
+   ```bash
+   cd vibe-it/world-miniapp
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file with the following variables:
+   ```bash
+   # Required for NextAuth
+   NEXTAUTH_SECRET=your-secret-key-here
+   AUTH_SECRET=your-secret-key-here
+   
+   # Required for World ID integration
+   NEXT_PUBLIC_APP_ID=app_your_app_id_here
+   
+   # Required for wallet authentication
+   HMAC_SECRET_KEY=your-hmac-secret-key
+   
+   # Backend URL (if using the backend)
+   NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+   
+   # Environment setting
+   NEXT_PUBLIC_APP_ENV=development
+   ```
+
+4. **Generate authentication secret**
+   ```bash
+   npx auth secret
+   ```
+   Copy the generated secret to your `.env.local` file as `AUTH_SECRET`
+
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Set up ngrok tunnel**
+   In a separate terminal, run:
+   ```bash
+   ngrok http 3000
+   ```
+   
+   Note the HTTPS URL provided by ngrok (e.g., `https://abc123.ngrok-free.app`)
+
+7. **Update configuration for ngrok**
+   - Add your ngrok URL to the `AUTH_URL` in `.env.local`:
+     ```bash
+     AUTH_URL=https://abc123.ngrok-free.app
+     ```
+   
+   - Update `next.config.ts` to include your ngrok domain in `allowedDevOrigins`:
+     ```typescript
+     const nextConfig = {
+       // ... other config
+       allowedDevOrigins: ['https://abc123.ngrok-free.app']
+     }
+     ```
+
+8. **Configure in Worldcoin Developer Portal**
+   - Go to [developer.worldcoin.org](https://developer.worldcoin.org)
+   - Create or select your app
+   - Update the app's URL to your ngrok HTTPS URL
+   - Note your `app_id` and add it to your `.env.local`
+
+9. **Test the Mini App**
+   - Open World App on your phone
+   - Navigate to the mini app using your ngrok URL
+   - Or use the [Worldcoin Simulator](https://simulator.worldcoin.org) for testing
+
+### Development Notes
+
+- The app uses **Eruda** for mobile debugging (disabled in production)
+- Hot reloading is enabled for development
+- Use the World App or Worldcoin Simulator to test World ID verification
+- Check the console logs in Eruda for debugging on mobile
+
+### Troubleshooting
+
+- If ngrok URL changes, update both `.env.local` and `next.config.ts`
+- Ensure your Worldcoin Developer Portal app is configured for the correct environment
+- Check that all environment variables are properly set
+- Verify that the World App can access your ngrok URL
 
 ---
 
