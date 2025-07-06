@@ -2,31 +2,35 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    background: var(--background);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .opinion-form {
-    background: white;
+    background: var(--card);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
     margin-bottom: 30px;
     transition: all 0.3s ease;
+    border: 1px solid var(--border);
 }
 
 .opinion-form:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-xl);
 }
 
 .opinion-form h2 {
-    color: #2c3e50;
+    color: var(--foreground);
     margin-bottom: 25px;
     font-size: 1.8em;
     text-align: center;
     font-weight: 600;
+    letter-spacing: -0.025em;
 }
 
 .form-group {
@@ -36,7 +40,7 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #34495e;
+    color: var(--foreground);
     font-weight: 500;
     font-size: 1.1em;
 }
@@ -44,23 +48,25 @@
 .opinion-input {
     width: 100%;
     padding: 15px;
-    border: 2px solid #e0e6ed;
-    border-radius: 10px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
     font-size: 16px;
     font-family: inherit;
     resize: vertical;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    background: var(--background);
+    color: var(--foreground);
 }
 
 .opinion-input:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .opinion-input::placeholder {
-    color: #95a5a6;
+    color: var(--muted-foreground);
     font-style: italic;
 }
 
@@ -73,6 +79,7 @@
     margin: 15px 0;
     cursor: pointer;
     transition: all 0.3s ease;
+    background: linear-gradient(to right, #ef4444, #f59e0b, #10b981);
 }
 
 .valuation-slider::-webkit-slider-thumb {
@@ -82,15 +89,15 @@
     height: 25px;
     border-radius: 50%;
     background: white;
-    border: 3px solid #3498db;
+    border: 3px solid var(--primary);
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
     transition: all 0.3s ease;
 }
 
 .valuation-slider::-webkit-slider-thumb:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-xl);
 }
 
 .valuation-slider::-moz-range-thumb {
@@ -98,9 +105,9 @@
     height: 25px;
     border-radius: 50%;
     background: white;
-    border: 3px solid #3498db;
+    border: 3px solid var(--primary);
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
 }
 
 .slider-labels {
@@ -123,47 +130,51 @@
 .submit-button {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-primary);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
+    box-shadow: var(--shadow-md);
 }
 
 .submit-button:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-lg);
 }
 
 .submit-button:disabled {
-    background: #bdc3c7;
+    background: var(--muted);
+    color: var(--muted-foreground);
     cursor: not-allowed;
     transform: none;
 }
 
 .opinions-list {
-    background: white;
+    background: var(--card);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
 }
 
 .opinions-list h3 {
-    color: #2c3e50;
+    color: var(--foreground);
     margin-bottom: 20px;
     font-size: 1.5em;
     text-align: center;
     font-weight: 600;
+    letter-spacing: -0.025em;
 }
 
 .no-opinions {
     text-align: center;
-    color: #7f8c8d;
+    color: var(--muted-foreground);
     font-style: italic;
     padding: 40px;
     font-size: 1.1em;
@@ -177,19 +188,20 @@
 }
 
 .opinion-card {
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 12px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 20px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
 .opinion-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    border-color: #3498db;
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
 }
 
 .opinion-card::before {
@@ -199,7 +211,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-primary);
 }
 
 .opinion-content {
@@ -208,7 +220,7 @@
 }
 
 .opinion-text {
-    color: #2c3e50;
+    color: var(--foreground);
     font-size: 1em;
     line-height: 1.6;
     margin-bottom: 15px;
@@ -228,7 +240,21 @@
     font-size: 0.85em;
     font-weight: 600;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-md);
+}
+
+.rating-badge.rating-1,
+.rating-badge.rating-2 {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.rating-badge.rating-3 {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.rating-badge.rating-4,
+.rating-badge.rating-5 {
+    background: linear-gradient(135deg, #10b981, #059669);
 }
 
 /* Responsive design */
@@ -273,6 +299,17 @@
     }
 }
 
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .valuation-slider {
+        background: linear-gradient(to right, #dc2626, #d97706, #059669);
+    }
+    
+    .opinion-card {
+        background: var(--card);
+    }
+}
+
 /* Animation for new opinions */
 @keyframes slideIn {
     from {
@@ -287,4 +324,28 @@
 
 .opinion-card {
     animation: slideIn 0.5s ease-out;
+}
+
+/* Enhanced focus states for accessibility */
+.opinion-input:focus,
+.valuation-slider:focus,
+.submit-button:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* Loading states */
+.loading-shimmer {
+    background: linear-gradient(90deg, var(--muted) 25%, var(--accent) 50%, var(--muted) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
 } 
