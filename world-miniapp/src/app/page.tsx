@@ -50,7 +50,7 @@ export default function Home() {
         </div>
 
         {/* Auth Section */}
-        <div className="w-full max-w-md space-y-4">
+        <div className="w-full max-w-md space-y-4 mx-auto">
           <AuthButton />
           
           {/* Optional: Add some stats or info */}

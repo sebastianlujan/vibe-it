@@ -1,8 +1,7 @@
 import { auth } from '@/auth';
 import { Page } from '@/components/PageLayout';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
-import { EventList } from '@/components/EventList';
-import { DaySelector } from '@/components/DaySelector/DaySelector';
+import { HomeContent } from './HomeContent';
 
 export default async function Home() {
   const session = await auth();
@@ -35,25 +34,7 @@ export default async function Home() {
       </Page.Header>
       
       <Page.Main className="bg-gradient-to-br from-gray-50 to-white px-4 py-6">
-        <div className="space-y-6">
-          {/* Welcome Section */}
-          <div className="text-center space-y-2">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Discover Amazing Events
-            </h1>
-            <p className="text-gray-600">
-              Find your next side event in Cannes
-            </p>
-          </div>
-
-          {/* Day Selector */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200">
-            <DaySelector />
-          </div>
-
-          {/* Events List */}
-          <EventList />
-        </div>
+        <HomeContent />
       </Page.Main>
     </>
   );

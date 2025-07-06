@@ -25,21 +25,48 @@ const LoadingSkeleton = () => (
   </div>
 );
 
-const EmptyState = ({ selectedDate }: { selectedDate: string | null }) => (
-  <div className="flex flex-col items-center justify-center py-16 px-4">
-    <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mb-6">
-      <Calendar className="w-12 h-12 text-indigo-500" />
+const EmptyState = ({ selectedDate, searchTerm }: { selectedDate: string | null; searchTerm: string }) => {
+  const getEmptyMessage = () => {
+    if (searchTerm && selectedDate) {
+      return {
+        title: 'No events found',
+        description: `No events match "${searchTerm}" for the selected date. Try different keywords or select another date.`
+      };
+    }
+    if (searchTerm) {
+      return {
+        title: 'No events found',
+        description: `No events match "${searchTerm}". Try different keywords or browse all events.`
+      };
+    }
+    if (selectedDate) {
+      return {
+        title: 'No events for this date',
+        description: 'Try selecting a different date to discover more events.'
+      };
+    }
+    return {
+      title: 'No events found',
+      description: 'Events will appear here once they are available.'
+    };
+  };
+
+  const { title, description } = getEmptyMessage();
+
+  return (
+    <div className="flex flex-col items-center justify-center py-16 px-4">
+      <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mb-6">
+        <Calendar className="w-12 h-12 text-indigo-500" />
+      </div>
+      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        {title}
+      </h3>
+      <p className="text-gray-600 text-center max-w-sm">
+        {description}
+      </p>
     </div>
-    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-      {selectedDate ? 'No events for this date' : 'No events found'}
-    </h3>
-    <p className="text-gray-600 text-center max-w-sm">
-      {selectedDate 
-        ? 'Try selecting a different date to discover more events.' 
-        : 'Events will appear here once they are available.'}
-    </p>
-  </div>
-);
+  );
+};
 
 const ErrorState = ({ error }: { error: string }) => (
   <div className="flex flex-col items-center justify-center py-16 px-4">
@@ -61,7 +88,11 @@ const ErrorState = ({ error }: { error: string }) => (
   </div>
 );
 
-export const EventList = () => {
+interface EventListProps {
+  searchTerm?: string;
+}
+
+export const EventList = ({ searchTerm = '' }: EventListProps) => {
   const { events, loading, error } = useEvents();
   const { selectedDate } = useDayFilter();
 
@@ -69,21 +100,45 @@ export const EventList = () => {
   if (error) return <ErrorState error={error} />;
 
   const filteredEvents = events.filter((eventEntry) => {
-    if (!selectedDate) return true;
-    const eventDate = new Date(eventEntry.event.start_at).toISOString().split('T')[0];
-    return eventDate === selectedDate;
+    // Filter by date
+    if (selectedDate) {
+      const eventDate = new Date(eventEntry.event.start_at).toISOString().split('T')[0];
+      if (eventDate !== selectedDate) return false;
+    }
+
+    // Filter by search term
+    if (searchTerm) {
+      const eventName = eventEntry.event.name.toLowerCase();
+      const searchLower = searchTerm.toLowerCase();
+      return eventName.includes(searchLower);
+    }
+
+    return true;
   });
 
   if (filteredEvents.length === 0) {
-    return <EmptyState selectedDate={selectedDate} />;
+    return <EmptyState selectedDate={selectedDate} searchTerm={searchTerm} />;
   }
+
+  const getHeaderText = () => {
+    if (searchTerm && selectedDate) {
+      return `Results for "${searchTerm}" on selected date`;
+    }
+    if (searchTerm) {
+      return `Results for "${searchTerm}"`;
+    }
+    if (selectedDate) {
+      return 'Events for selected date';
+    }
+    return 'All Events';
+  };
 
   return (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-900">
-          {selectedDate ? 'Events for selected date' : 'All Events'}
+          {getHeaderText()}
         </h2>
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">
