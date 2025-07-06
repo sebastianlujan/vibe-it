@@ -31,6 +31,7 @@ export const EventCard = ({
     if (score >= 4) return 'text-green-500';
     if (score >= 3) return 'text-yellow-500';
     if (score >= 2) return 'text-orange-500';
+    if (score == 0) return 'text-gray-500';
     return 'text-red-500';
   };
 
@@ -38,6 +39,7 @@ export const EventCard = ({
     if (score >= 4) return 'bg-green-50 border-green-200';
     if (score >= 3) return 'bg-yellow-50 border-yellow-200';
     if (score >= 2) return 'bg-orange-50 border-orange-200';
+    if (score == 0) return 'bg-gray-50 border-gray-200';
     return 'bg-red-50 border-red-200';
   };
 
